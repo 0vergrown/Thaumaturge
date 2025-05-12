@@ -41,7 +41,16 @@ public class SpellHandler {
             // Create and shoot the spell bolt
             SpellBoltEntity bolt = new SpellBoltEntity(ModEntities.SPELL_BOLT, player.getWorld());
             bolt.setCaster(player);
-            bolt.setPosition(player.getEyePos());
+
+            // Hitbox at the middle of the lightning
+            Vec3d hitbox = player.getEyePos().add(player.getRotationVector().multiply(SpellBoltEntity.LENGTH / 2));
+
+            bolt.setPosition(hitbox);
+
+            bolt.setYaw(player.getHeadYaw());
+            bolt.setPitch(player.getPitch());
+
+            /*
             Vec3d direction = player.getRotationVector().normalize();
             Vec3d spawnPos = player.getEyePos().add(direction.multiply(0.2));
             bolt.setPosition(spawnPos);
@@ -52,6 +61,7 @@ public class SpellHandler {
             );
             bolt.setVelocity(direction.multiply(1.5));
             ProjectileUtil.setRotationFromVelocity(bolt, 1.0f);
+             */
             bolt.setTier(tier.ordinal());
 
             // Collect effects from other aspects and modifiers
@@ -120,7 +130,7 @@ public class SpellHandler {
                 GauntletComponent component = stack.get(ModComponents.GAUNTLET_STATE);
                 if (component != null) {
                     entries.addAll(component.entries().stream()
-                            .filter(e -> e.tier() == tier)
+                            // TODO: .filter(e -> e.tier().equals(tier))
                             .toList());
                 }
             }
