@@ -39,8 +39,14 @@ public class SpellBoltRenderer extends EntityRenderer<SpellBoltEntity, SpellBolt
     @Override
     public void render(SpellBoltRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(state.yaw + 180.0F));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-state.yaw));
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(state.pitch));
+
+        // Move beam little bit to the right
+        matrices.translate(-0.2, -0.2, 0);
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(3));
+        matrices.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(3));
+
         renderBolt(matrices, vertexConsumers, state.tier, state.seed);
         matrices.pop();
     }
@@ -60,15 +66,16 @@ public class SpellBoltRenderer extends EntityRenderer<SpellBoltEntity, SpellBolt
     }
 
     private void generateBranch(Matrix4f matrix, VertexConsumer consumer, Random random, float r, float g, float b, float alpha) {
-        int segments = 8;
-        float segmentLength = 0.5f;
+
+        int segments = (int) SpellBoltEntity.LENGTH;
+        float segmentLength = 1f;
         float spread = 0.35f;
 
         float prevX = 0;
         float prevY = 0;
         float prevZ = 0;
 
-        for (int i = 0; i < segments; i++) {
+        for (int i = -segments/2; i < segments/2; i++) {
             // Move forward in local Z axis (bolt's direction)
             float z = i * segmentLength;
 
@@ -76,13 +83,12 @@ public class SpellBoltRenderer extends EntityRenderer<SpellBoltEntity, SpellBolt
             float x = (random.nextFloat() - 0.5f) * spread;
             float y = (random.nextFloat() - 0.5f) * spread;
 
-            if (i > 0) {
                 // Draw line from previous point to current
                 consumer.vertex(matrix, prevX, prevY, prevZ)
                         .color(r, g, b, alpha);
                 consumer.vertex(matrix, x, y, z)
                         .color(r, g, b, alpha);
-            }
+
 
             prevX = x;
             prevY = y;

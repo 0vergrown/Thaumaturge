@@ -1,19 +1,27 @@
 package dev.overgrown.thaumaturge.spell.impl.potentia.entity;
 
+import dev.overgrown.thaumaturge.spell.impl.potentia.render.SpellBoltRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +39,8 @@ public class SpellBoltEntity extends Entity {
         super(type, world);
         this.life = 2;
     }
+
+    public static final double LENGTH = 16;
 
     public void setCaster(PlayerEntity caster) {
         this.casterUuid = caster.getUuid();
@@ -52,10 +62,17 @@ public class SpellBoltEntity extends Entity {
         // Write custom data to NBT (if needed)
     }
 
-    public long getSeed() { return dataTracker.get(SEED); }
-    public int getTier() { return dataTracker.get(TIER); }
+    public long getSeed() {
+        return dataTracker.get(SEED);
+    }
 
-    public void setTier(int tier) { dataTracker.set(TIER, tier); }
+    public int getTier() {
+        return dataTracker.get(TIER);
+    }
+
+    public void setTier(int tier) {
+        dataTracker.set(TIER, tier);
+    }
 
     public void setOnHitEffects(List<Consumer<Entity>> effects) {
         this.onHitEffects = effects;
@@ -63,37 +80,76 @@ public class SpellBoltEntity extends Entity {
 
     @Override
     public void tick() {
+
         super.tick();
-        if (life-- <= 0) {
-            discard();
-            return;
-        }
 
-        Vec3d startPos = getPos();
-        Vec3d endPos = startPos.add(getVelocity());
-        EntityHitResult hitResult = ProjectileUtil.raycast(
-                this,
-                startPos,
-                endPos,
-                getBoundingBox().stretch(getVelocity()),
-                entity -> {
-                    if (entity.isSpectator() || !entity.isAlive()) {
-                        return false;
-                    }
-                    // Exclude the caster from collision
-                    return !entity.getUuid().equals(casterUuid);
-                },
-                getVelocity().lengthSquared()
-        );
+        if (getWorld() instanceof ServerWorld serverWorld) {
 
-        if (hitResult != null) {
-            Entity target = hitResult.getEntity();
-            onHitEffects.forEach(effect -> effect.accept(target));
-            discard();
-        } else {
-            setVelocity(getVelocity().multiply(0.95));
-            move(MovementType.SELF, getVelocity());
-            ProjectileUtil.setRotationFromVelocity(this, 1.0f);
+            if (life-- <= 0) {
+                discard();
+                return;
+            }
+
+            Vector3f unit_facing = getRotationVector().toVector3f().normalize();
+            Vector3f beam_start_pos = getPos().toVector3f().add(unit_facing.negate().mul((float) (SpellBoltEntity.LENGTH / 2)));
+
+            final double step_multiplier = 3;
+
+            Vec3d unit = new Vec3d(unit_facing).multiply(1.0 / step_multiplier);
+            Vec3d beam_start = new Vec3d(beam_start_pos);
+
+            ArrayList<Entity> entities = new ArrayList<>();
+
+            // Simple raytracing
+            for (int i = 0; i < (int) SpellBoltEntity.LENGTH * step_multiplier; i++) {
+
+                Vec3d currentCenterPos = beam_start.add(unit.multiply(i).negate());
+
+                // Visualize raytracing check
+                serverWorld.spawnParticles(ParticleTypes.HAPPY_VILLAGER, currentCenterPos.x, currentCenterPos.y, currentCenterPos.z, 1, 0, 0, 0, 100);
+
+                List<Entity> hit = serverWorld.getOtherEntities(this, Box.of(currentCenterPos, 2, 2, 2),
+                        entity -> {
+                            if (entity.isSpectator() || !entity.isAlive()) {
+                                return false;
+                            }
+                            // Exclude the caster from collision
+                            return !entity.getUuid().equals(casterUuid);
+                        });
+                entities.addAll(hit);
+            }
+
+            for (final Entity entity : entities) {
+                entity.damage(serverWorld, serverWorld.getDamageSources().lightningBolt(), 10);
+            }
+
+            /*
+            EntityHitResult hitResult = ProjectileUtil.raycast(
+                    this,
+                    startPos,
+                    endPos,
+                    getBoundingBox().stretch(getVelocity()),
+                    entity -> {
+                        if (entity.isSpectator() || !entity.isAlive()) {
+                            return false;
+                        }
+                        // Exclude the caster from collision
+                        return !entity.getUuid().equals(casterUuid);
+                    },
+                    getVelocity().lengthSquared()
+            );
+
+            if (hitResult != null) {
+                Entity target = hitResult.getEntity();
+                target.damage(serverWorld, serverWorld.getDamageSources().lightningBolt(), 10);
+                // onHitEffects.forEach(effect -> effect.accept(target));
+                discard();
+            } else {
+                setVelocity(getVelocity().multiply(0.95));
+                move(MovementType.SELF, getVelocity());
+                ProjectileUtil.setRotationFromVelocity(this, 1.0f);
+            }
+            */
         }
     }
 
