@@ -1,53 +1,62 @@
 {
-	"schemaVersion": 1,
-	"id": "thaumaturge",
-	"version": "${version}",
-	"name": "Thaumaturge",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Overgrown"
-	],
-	"contact": {
-		"homepage": "",
-		"sources": "https://github.com/0vergrown/Thaumaturge"
-	},
-	"license": "Overgrown-Custom-License-v1.0",
-	"icon": "assets/thaumaturge/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"dev.overgrown.thaumaturge.Thaumaturge"
-		],
-		"fabric-datagen": [
-			"dev.overgrown.thaumaturge.ThaumaturgeDataGenerator"
-		],
-		"client": [
-			"dev.overgrown.thaumaturge.ThaumaturgeClient"
-		],
-		"modmenu": [
-			"dev.overgrown.thaumaturge.compat.modmenu.ModMenuCompat"
-		]
-	},
-	"mixins": [
-		"thaumaturge.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=0.16.14",
-		"minecraft": "~1.21.7",
-		"java": ">=21",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"modmenu": "*"
-	},
-	"custom": {
-		"modmenu": {
-			"links": {
-				"modmenu.issues": "https://github.com/0vergrown/Thaumaturge/issues",
-				"modmenu.discord": "https://discord.gg/YOUR_INVITE_CODE"
-			},
-			"update_checker": true,
-			"badges": []
-		}
-	}
+   "schemaVersion":1,
+   "id":"thaumaturge",
+   "version":"${version}",
+   "name":"Thaumaturge",
+   "description":"This is an example description! Tell everyone what your mod is about!",
+   "authors":[
+      "Overgrown"
+   ],
+   "contributors":[
+      "thatrobin3001",
+      "electrictaco",
+      "Nitgo",
+      "Eggohito",
+      "Lucas Bandermann"
+   ],
+   "contact":{
+      "homepage":"",
+      "sources":"https://github.com/0vergrown/Thaumaturge"
+   },
+   "license":"Overgrown-Custom-License-v1.0",
+   "icon":"assets/thaumaturge/icon.png",
+   "environment":"*",
+   "entrypoints":{
+      "main":[
+         "dev.overgrown.thaumaturge.Thaumaturge"
+      ],
+      "fabric-datagen":[
+         "dev.overgrown.thaumaturge.ThaumaturgeDataGenerator"
+      ],
+      "client":[
+         "dev.overgrown.thaumaturge.ThaumaturgeClient"
+      ],
+      "modmenu":[
+         "dev.overgrown.thaumaturge.compat.modmenu.ModMenuCompat"
+      ]
+   },
+   "mixins":[
+      "thaumaturge.mixins.json"
+   ],
+   "depends":{
+      "fabricloader":">=0.16.14",
+      "minecraft":"~1.21.7",
+      "java":">=21",
+      "fabric-api":"*"
+   },
+   "suggests":{
+      "modmenu":"*"
+   },
+   "custom":{
+      "modmenu":{
+         "links":{
+            "modmenu.issues":"https://github.com/0vergrown/Thaumaturge/issues",
+            "modmenu.discord":"https://discord.gg/YOUR_INVITE_CODE"
+         },
+         "update_checker":true,
+         "badges":[
+            
+         ]
+      }
+   }
 }
