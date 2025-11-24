@@ -22,6 +22,10 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
 public class ModItems {
+    private static Item registerItem(String name, Item item) {
+        return Registry.register(Registries.ITEM, Thaumaturge.identifier(name), item);
+    }
+
     public static final Item BONEWITS_DUST = registerItem("bonewits_dust",
             new BonewitsDustItem(new FabricItemSettings()
                     .maxCount(64)
@@ -102,14 +106,42 @@ public class ModItems {
     public static final Item ALCHEMICAL_SLUDGE_BOTTLE = registerItem("alchemical_sludge_bottle",
             new AlchemicalSludgeBottleItem());
 
+    // Block Items
     public static final Item VESSEL = new BlockItem(ModBlocks.VESSEL, new FabricItemSettings());
     public static final Item FAUCET = new BlockItem(ModBlocks.FAUCET, new FabricItemSettings());
     public static final Item JAR = new BlockItem(ModBlocks.JAR, new FabricItemSettings());
     public static final Item ALCHEMICAL_FURNACE = new BlockItem(ModBlocks.ALCHEMICAL_FURNACE, new FabricItemSettings());
 
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, Thaumaturge.identifier(name), item);
-    }
+    // Aspect Cluster Block Items
+    public static final Item AER_CLUSTER = new BlockItem(ModBlocks.AER_CLUSTER,
+            new FabricItemSettings()
+                    .maxCount(16)
+    );
+
+    public static final Item AQUA_CLUSTER = new BlockItem(ModBlocks.AQUA_CLUSTER,
+            new FabricItemSettings()
+                    .maxCount(16)
+    );
+
+    public static final Item IGNIS_CLUSTER = new BlockItem(ModBlocks.IGNIS_CLUSTER,
+            new FabricItemSettings()
+                    .maxCount(16)
+    );
+
+    public static final Item TERRA_CLUSTER = new BlockItem(ModBlocks.TERRA_CLUSTER,
+            new FabricItemSettings()
+                    .maxCount(16)
+    );
+
+    public static final Item ORDO_CLUSTER = new BlockItem(ModBlocks.ORDO_CLUSTER,
+            new FabricItemSettings()
+                    .maxCount(16)
+    );
+
+    public static final Item PERDITIO_CLUSTER = new BlockItem(ModBlocks.PERDITIO_CLUSTER,
+            new FabricItemSettings()
+                    .maxCount(16)
+    );
 
     public static Item getModifierItem(String modifierType) {
         return switch (modifierType) {
@@ -121,9 +153,18 @@ public class ModItems {
     }
 
     public static void initialize() {
+        // Register block items
         Registry.register(Registries.ITEM, Thaumaturge.identifier("vessel"), VESSEL);
         Registry.register(Registries.ITEM, Thaumaturge.identifier("faucet"), FAUCET);
         Registry.register(Registries.ITEM, Thaumaturge.identifier("jar"), JAR);
         Registry.register(Registries.ITEM, Thaumaturge.identifier("alchemical_furnace"), ALCHEMICAL_FURNACE);
+
+        // Register Aspect Cluster block items
+        Registry.register(Registries.ITEM, Thaumaturge.identifier("aer_cluster"), AER_CLUSTER);
+        Registry.register(Registries.ITEM, Thaumaturge.identifier("aqua_cluster"), AQUA_CLUSTER);
+        Registry.register(Registries.ITEM, Thaumaturge.identifier("ignis_cluster"), IGNIS_CLUSTER);
+        Registry.register(Registries.ITEM, Thaumaturge.identifier("terra_cluster"), TERRA_CLUSTER);
+        Registry.register(Registries.ITEM, Thaumaturge.identifier("ordo_cluster"), ORDO_CLUSTER);
+        Registry.register(Registries.ITEM, Thaumaturge.identifier("perditio_cluster"), PERDITIO_CLUSTER);
     }
 }

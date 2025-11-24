@@ -1,2 +1,4 @@
-// 1.20.1	2025-11-16T17:31:45.338964095	Thaumaturge/Tags for minecraft:item
+// 1.20.1	2025-11-18T14:53:58.796485863	Thaumaturge/Tags for minecraft:item
 58fb688503f20fb08f1da2fe0f53dd6718a9b873 data/thaumaturge/tags/items/vessel_no_sludge.json
+909913006fe0a00db6337bb4adbdbef47140f961 data/thaumaturge/tags/items/dyeable.json
+909913006fe0a00db6337bb4adbdbef47140f961 data/minecraft/tags/items/trimmable_armor.json

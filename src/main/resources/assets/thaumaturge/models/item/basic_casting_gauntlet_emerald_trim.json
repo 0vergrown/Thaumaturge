@@ -1,0 +1,9 @@
+{
+	"parent": "thaumaturge:item/basic_casting_gauntlet_base",
+	"textures": {
+		"focus": "thaumaturge:item/basic_casting_gauntlet/foci",
+		"layer0": "thaumaturge:item/basic_casting_gauntlet/leather_overlay",
+		"layer2": "thaumaturge:trims/items/basic_casting_gauntlet_trim_emerald",
+		"particle": "thaumaturge:item/basic_casting_gauntlet/runic"
+	}
+}
