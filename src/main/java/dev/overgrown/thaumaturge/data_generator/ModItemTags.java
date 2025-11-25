@@ -17,9 +17,6 @@ public class ModItemTags extends FabricTagProvider.ItemTagProvider {
 
     public static final TagKey<Item> VESSEL_NO_SLUDGE = TagKey.of(RegistryKeys.ITEM, Thaumaturge.identifier("vessel_no_sludge"));
 
-    // Create a custom dyeable tag
-    public static final TagKey<Item> DYEABLE = TagKey.of(RegistryKeys.ITEM, Thaumaturge.identifier("dyeable"));
-
     public ModItemTags(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
         super(output, completableFuture);
     }
@@ -65,10 +62,6 @@ public class ModItemTags extends FabricTagProvider.ItemTagProvider {
                 .add(AspectsLib.identifier("sensus_aspect_shard"))
                 .add(AspectsLib.identifier("vitium_aspect_shard"))
                 .add(AspectsLib.identifier("fames_aspect_shard"));
-
-        // Add gauntlet to custom dyeable items
-        getOrCreateTagBuilder(DYEABLE)
-                .add(ModItems.BASIC_CASTING_GAUNTLET);
 
         // Add gauntlet to trimmable armor
         getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)

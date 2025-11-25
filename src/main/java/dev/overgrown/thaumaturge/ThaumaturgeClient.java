@@ -13,25 +13,36 @@ import dev.overgrown.thaumaturge.item.apophenia.predicate.ApopheniaModelProvider
 import dev.overgrown.thaumaturge.registry.ModBlocks;
 import dev.overgrown.thaumaturge.registry.ModEntities;
 import dev.overgrown.thaumaturge.item.aspect_lens.AspectLensItem;
+import dev.overgrown.thaumaturge.registry.ModItems;
 import dev.overgrown.thaumaturge.registry.ModScreens;
-import dev.overgrown.thaumaturge.screen.AlchemicalFurnaceScreenHandler;
 import dev.overgrown.thaumaturge.spell.impl.potentia.render.SpellBoltRenderer;
 import dev.overgrown.thaumaturge.spell.networking.SpellCastPacket;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
+import net.minecraft.item.DyeableItem;
 
 public class ThaumaturgeClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+
+        // Register color provider for the gauntlet
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            if (tintIndex > 0) {
+                return -1; // No tint for other layers
+            }
+            return ((DyeableItem) stack.getItem()).getColor(stack);
+        }, ModItems.BASIC_CASTING_GAUNTLET);
+
         // Registers the Apophenia model predicate
         ApopheniaModelProvider.register();
 
