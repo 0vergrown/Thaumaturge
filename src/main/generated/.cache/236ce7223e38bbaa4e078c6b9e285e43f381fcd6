@@ -1,5 +1,5 @@
-// 1.20.1	2025-11-18T14:53:58.796115346	Thaumaturge/Block Loot Tables
-99b5b8ebf671c199b1c642dd8400008f2091f979 data/thaumaturge/loot_tables/blocks/faucet.json
-6b4dcb17726730183d7a6f935f5f8b01f37d2ac1 data/thaumaturge/loot_tables/blocks/jar.json
-a74c123ceb69dd6f053345f89af5cbac4bca5752 data/thaumaturge/loot_tables/blocks/alchemical_furnace.json
-452284199e53138a27116cd17a1df6a202f0acea data/thaumaturge/loot_tables/blocks/vessel.json
+// 1.20.1	2025-12-30T15:41:39.1956443	Thaumaturge/Block Loot Tables
+6b4dcb17726730183d7a6f935f5f8b01f37d2ac1 data\thaumaturge\loot_tables\blocks\jar.json
+99b5b8ebf671c199b1c642dd8400008f2091f979 data\thaumaturge\loot_tables\blocks\faucet.json
+452284199e53138a27116cd17a1df6a202f0acea data\thaumaturge\loot_tables\blocks\vessel.json
+a74c123ceb69dd6f053345f89af5cbac4bca5752 data\thaumaturge\loot_tables\blocks\alchemical_furnace.json

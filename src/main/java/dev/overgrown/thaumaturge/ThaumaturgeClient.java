@@ -1,6 +1,7 @@
 package dev.overgrown.thaumaturge;
 
 import dev.overgrown.aspectslib.client.AspectsTooltipConfig;
+import dev.overgrown.thaumaturge.block.PedestalBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.render.JarBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.render.VesselBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.screen.AlchemicalFurnaceScreen;
@@ -24,9 +25,11 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.block.entity.LecternBlockEntityRenderer;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.item.DyeableItem;
 
@@ -50,6 +53,8 @@ public class ThaumaturgeClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.SPELL_BOLT, SpellBoltRenderer::new);
         EntityRendererRegistry.register(ModEntities.ARCANE_MINE, EmptyEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.ALKIMIA_CLOUD, EmptyEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlocks.PEDESTAL_BE, PedestalBlockEntityRenderer::new);
+
 
         // Tooltips visible only with lens
         AspectsTooltipConfig.addVisibilityCondition((stack, player) -> AspectLensItem.hasLens(player));
