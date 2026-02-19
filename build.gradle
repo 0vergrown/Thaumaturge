@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version "${loom_version}"
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -11,47 +11,47 @@ base {
 }
 
 repositories {
-    // Add Modrinth Maven with exclusive content filter
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Modrinth"
-                url = "https://api.modrinth.com/maven"
-            }
-        }
-        filter {
-            includeGroup "maven.modrinth"
-        }
-    }
+	// Add Modrinth Maven with exclusive content filter
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
 
-    maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6's maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // location of the maven that hosts JEI files
-        name = "Jared's maven"
-        url = "https://maven.blamejared.com/"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
+	maven {
+		// location of the maven that hosts JEI files
+		name = "Progwml6's maven"
+		url = "https://dvs1.progwml6.com/files/maven/"
+	}
+	maven {
+		// location of the maven that hosts JEI files
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		// location of a maven mirror for JEI files, as a fallback
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
 
-    maven {
-        url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/"
-        content {
-            includeGroup "com.klikli_dev"
-        }
-    }
+	maven {
+		url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/"
+		content {
+			includeGroup "com.klikli_dev"
+		}
+	}
 }
 
 fabricApi {
 	configureDataGeneration {
 		client = true
-        modId = "thaumaturge"
+		modId = "thaumaturge"
 	}
 }
 
@@ -62,19 +62,19 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
 	// AspectsLib Dependency (Required)
 	modImplementation "maven.modrinth:aspectslib:${project.aspectslib_version}"
 
-    // Modonomicon Dependency (Optional)
-    modImplementation "com.klikli_dev:modonomicon-${minecraft_version}-fabric:${modonomicon_version}"
-    modRuntimeOnly "com.klikli_dev:modonomicon-${minecraft_version}-fabric:${modonomicon_version}"
+	// Modonomicon Dependency (Optional)
+	modImplementation "com.klikli_dev:modonomicon-${minecraft_version}-fabric:${modonomicon_version}"
+	modRuntimeOnly "com.klikli_dev:modonomicon-${minecraft_version}-fabric:${modonomicon_version}"
 
-    // compile against the JEI API but do not include it at runtime
-    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")
-    // at runtime, use the full JEI jar for Fabric
-    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
+	// compile against the JEI API but do not include it at runtime
+	modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")
+	// at runtime, use the full JEI jar for Fabric
+	modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
 	
 }
 
