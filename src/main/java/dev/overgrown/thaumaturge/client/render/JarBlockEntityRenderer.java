@@ -1,8 +1,5 @@
 package dev.overgrown.thaumaturge.client.render;
 
-import dev.overgrown.aspectslib.api.AspectsAPI;
-import dev.overgrown.aspectslib.data.Aspect;
-import dev.overgrown.aspectslib.data.ModRegistries;
 import dev.overgrown.thaumaturge.block.jar.JarBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,8 +14,6 @@ import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.joml.Matrix4f;
-
-import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class JarBlockEntityRenderer implements BlockEntityRenderer<JarBlockEntity> {

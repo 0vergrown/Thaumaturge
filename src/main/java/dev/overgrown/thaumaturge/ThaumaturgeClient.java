@@ -1,6 +1,6 @@
 package dev.overgrown.thaumaturge;
 
-import dev.overgrown.aspectslib.client.AspectsTooltipConfig;
+import dev.overgrown.aspectslib.aspects.client.AspectsTooltipConfig;
 import dev.overgrown.thaumaturge.client.render.JarBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.render.VesselBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.screen.AlchemicalFurnaceScreen;

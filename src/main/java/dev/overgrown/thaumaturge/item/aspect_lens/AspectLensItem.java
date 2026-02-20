@@ -2,7 +2,7 @@ package dev.overgrown.thaumaturge.item.aspect_lens;
 
 import dev.overgrown.aspectslib.aether.AetherChunkData;
 import dev.overgrown.aspectslib.aether.AetherManager;
-import dev.overgrown.aspectslib.data.BiomeAspectModifier;
+import dev.overgrown.aspectslib.aspects.data.BiomeAspectModifier;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,7 +1,7 @@
 package dev.overgrown.thaumaturge.spell.utils;
 
 import dev.overgrown.aspectslib.aether.AetherAPI;
-import dev.overgrown.aspectslib.data.AspectData;
+import dev.overgrown.aspectslib.aspects.data.AspectData;
 import dev.overgrown.thaumaturge.item.gauntlet.ResonanceGauntletItem;
 import dev.overgrown.thaumaturge.spell.modifier.ModifierEffect;
 import dev.overgrown.thaumaturge.spell.modifier.ModifierRegistry;
