@@ -1,22 +1,23 @@
 {
-	"required":true,
-	"package":"dev.overgrown.thaumaturge.mixin",
-	"compatibilityLevel":"JAVA_17",
-	"mixins":[
-		"ItemEntityMixin",
-		"ItemRendererAccessor",
-		"ItemUseMixin",
-		"SlotClickMixin"
-	],
-	"injectors":{
-		"defaultRequire":1
-	},
-	"overwrites":{
-		"requireAnnotations":true
-	},
-	"client":[
-		"ItemRendererMixin",
-		"ModelLoaderMixin",
-		"modonomicon.ApopheniaModonomiconScreenMixin"
-	]
+  "required": true,
+  "package": "dev.overgrown.thaumaturge.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ItemEntityMixin",
+    "ItemRendererAccessor",
+    "ItemUseMixin",
+    "SlotClickMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "client": [
+    "AbstractContainerScreenMixin",
+    "ItemRendererMixin",
+    "ModelLoaderMixin",
+    "modonomicon.ApopheniaModonomiconScreenMixin"
+  ]
 }

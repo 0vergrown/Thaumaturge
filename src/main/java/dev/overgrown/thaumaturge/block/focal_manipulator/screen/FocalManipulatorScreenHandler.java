@@ -41,27 +41,31 @@ public class FocalManipulatorScreenHandler extends ScreenHandler {
         inventory.onOpen(playerInventory.player);
 
         // Focus slot (bottom left)
-        this.addSlot(new Slot(inventory, 0, 44, 142) {
+        this.addSlot(new Slot(inventory, 0, 31, 190) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return stack.getItem() instanceof FocusItem;
             }
         });
 
+        int xStart = -56;
+
         // Player main inventory (3 rows, 9 columns) - aligned with inventory texture
-        for (int row = 0; row < 3; ++row) {
-            for (int col = 0; col < 9; ++col) {
+        for (int row = 0; row < 9; ++row) {
+            for (int col = 0; col < 3; ++col) {
                 this.addSlot(new Slot(playerInventory,
-                        col + row * 9 + 9,
-                        INV_START_X + col * SLOT_SIZE,
-                        INV_START_Y + row * SLOT_SIZE));
+                        col + row * 3 + 9,
+                        xStart + col * SLOT_SIZE,
+                        62 + row * SLOT_SIZE));
             }
         }
         // Player hotbar (1 row, 9 columns) - below main inventory
-        for (int col = 0; col < 9; ++col) {
-            this.addSlot(new Slot(playerInventory, col,
-                    INV_START_X + col * SLOT_SIZE,
-                    HOTBAR_Y));
+        for (int col = 0; col < 3; ++col) {
+            for (int row = 0; row < 3; ++row) {
+                this.addSlot(new Slot(playerInventory, col * 3 + row,
+                        xStart + col * SLOT_SIZE,
+                        5 + row * SLOT_SIZE));
+            }
         }
     }
 
