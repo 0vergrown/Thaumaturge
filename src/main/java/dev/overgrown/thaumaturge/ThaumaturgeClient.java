@@ -1,6 +1,7 @@
 package dev.overgrown.thaumaturge;
 
 import dev.overgrown.aspectslib.aspects.client.AspectsTooltipConfig;
+import dev.overgrown.thaumaturge.block.focal_manipulator.screen.FocalManipulatorScreen;
 import dev.overgrown.thaumaturge.client.render.JarBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.render.VesselBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.screen.AlchemicalFurnaceScreen;
@@ -88,5 +89,8 @@ public class ThaumaturgeClient implements ClientModInitializer {
 
         // Alchemical Furnace Screen
         HandledScreens.register(ModScreens.ALCHEMICAL_FURNACE_SCREEN_HANDLER, AlchemicalFurnaceScreen::new);
+
+        // Focal Manipulator Screen
+        HandledScreens.register(ModScreens.FOCAL_MANIPULATOR, FocalManipulatorScreen::new);
     }
 }
