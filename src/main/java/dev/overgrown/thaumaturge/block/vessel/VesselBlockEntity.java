@@ -1,10 +1,9 @@
 package dev.overgrown.thaumaturge.block.vessel;
 
-import dev.overgrown.aspectslib.api.AspectsAPI;
-import dev.overgrown.aspectslib.data.AspectData;
+import dev.overgrown.aspectslib.aspects.api.AspectsAPI;
+import dev.overgrown.aspectslib.aspects.data.AspectData;
 import dev.overgrown.thaumaturge.util.AspectMap;
 import dev.overgrown.thaumaturge.util.CorruptionHelper;
-import dev.overgrown.thaumaturge.Thaumaturge;
 import dev.overgrown.thaumaturge.block.api.AspectContainer;
 import dev.overgrown.thaumaturge.data_generator.ModItemTags;
 import dev.overgrown.thaumaturge.registry.ModBlocks;

@@ -1,6 +1,5 @@
 package dev.overgrown.thaumaturge.block.jar;
 
-import dev.overgrown.thaumaturge.Thaumaturge;
 import dev.overgrown.thaumaturge.block.api.AspectContainer;
 import dev.overgrown.thaumaturge.registry.ModBlocks;
 import net.minecraft.block.Block;
@@ -14,7 +13,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.windows.SECURITY_ATTRIBUTES;
 
 import java.util.Set;
 

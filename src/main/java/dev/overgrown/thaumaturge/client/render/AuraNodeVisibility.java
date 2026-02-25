@@ -1,6 +1,6 @@
 package dev.overgrown.thaumaturge.client.render;
 
-import dev.overgrown.aspectslib.api.AspectsAPI;
+import dev.overgrown.aspectslib.aspects.api.AspectsAPI;
 import dev.overgrown.thaumaturge.item.aetheric_goggles.AethericGogglesItem;
 
 public class AuraNodeVisibility {

@@ -1,8 +1,7 @@
 package dev.overgrown.thaumaturge.block.alchemical_furnace;
 
-import dev.overgrown.aspectslib.api.AspectsAPI;
-import dev.overgrown.aspectslib.data.AspectData;
-import dev.overgrown.thaumaturge.Thaumaturge;
+import dev.overgrown.aspectslib.aspects.api.AspectsAPI;
+import dev.overgrown.aspectslib.aspects.data.AspectData;
 import dev.overgrown.thaumaturge.block.api.AspectContainer;
 import dev.overgrown.thaumaturge.item.alchemical_sludge_bottle.AlchemicalSludgeBottleItem;
 import dev.overgrown.thaumaturge.registry.ModBlocks;

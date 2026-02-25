@@ -1,7 +1,7 @@
 package dev.overgrown.thaumaturge.item.focus;
 
-import dev.overgrown.aspectslib.api.AspectsAPI;
-import dev.overgrown.aspectslib.data.AspectData;
+import dev.overgrown.aspectslib.aspects.api.AspectsAPI;
+import dev.overgrown.aspectslib.aspects.data.AspectData;
 import dev.overgrown.thaumaturge.Thaumaturge;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

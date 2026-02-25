@@ -2,7 +2,6 @@ package dev.overgrown.thaumaturge.util;
 
 import dev.overgrown.aspectslib.AspectsLib;
 import dev.overgrown.aspectslib.corruption.CorruptionDataManager;
-import dev.overgrown.thaumaturge.Thaumaturge;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;

@@ -1,9 +1,9 @@
 package dev.overgrown.thaumaturge.item.aetheric_goggles.overlay;
 
-import dev.overgrown.aspectslib.api.IAspectAffinityEntity;
-import dev.overgrown.aspectslib.data.Aspect;
-import dev.overgrown.aspectslib.data.AspectData;
-import dev.overgrown.aspectslib.data.ModRegistries;
+import dev.overgrown.aspectslib.aspects.api.IAspectAffinityEntity;
+import dev.overgrown.aspectslib.aspects.data.Aspect;
+import dev.overgrown.aspectslib.aspects.data.AspectData;
+import dev.overgrown.aspectslib.aspects.data.ModRegistries;
 import dev.overgrown.aspectslib.entity.aura_node.AuraNodeEntity;
 import dev.overgrown.thaumaturge.block.api.AspectContainer;
 import dev.overgrown.thaumaturge.item.aetheric_goggles.AethericGogglesItem;
@@ -90,7 +90,7 @@ public class AethericGogglesOverlay implements HudRenderCallback {
             } else if (entity instanceof ItemEntity itemEntity) {
                 // Handle item entities
                 ItemStack stack = itemEntity.getStack();
-                return ((dev.overgrown.aspectslib.api.IAspectDataProvider) (Object) stack).aspectslib$getAspectData();
+                return ((dev.overgrown.aspectslib.aspects.api.IAspectDataProvider) (Object) stack).aspectslib$getAspectData();
             }
         }
         return null;

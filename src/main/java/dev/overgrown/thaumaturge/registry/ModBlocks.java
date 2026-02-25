@@ -9,6 +9,8 @@ import dev.overgrown.thaumaturge.block.alchemical_furnace.AlchemicalFurnaceBlock
 import dev.overgrown.thaumaturge.block.aspect_clusters.*;
 import dev.overgrown.thaumaturge.block.faucet.FaucetBlock;
 import dev.overgrown.thaumaturge.block.faucet.FaucetBlockEntity;
+import dev.overgrown.thaumaturge.block.focal_manipulator.FocalManipulatorBlock;
+import dev.overgrown.thaumaturge.block.focal_manipulator.FocalManipulatorBlockEntity;
 import dev.overgrown.thaumaturge.block.jar.JarBlock;
 import dev.overgrown.thaumaturge.block.jar.JarBlockEntity;
 import dev.overgrown.thaumaturge.block.vessel.VesselBlock;
@@ -54,6 +56,12 @@ public class ModBlocks {
     public static final Block PEDESTAL = new PedestalBlock(AbstractBlock.Settings.create());
     public static final BlockEntityType<PedestalBlockEntity> PEDESTAL_BE = BlockEntityType.Builder.create(PedestalBlockEntity::new,PEDESTAL).build(null);
 
+    public static final Block FOCAL_MANIPULATOR = new FocalManipulatorBlock(
+            FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()
+    );
+    public static final BlockEntityType<FocalManipulatorBlockEntity> FOCAL_MANIPULATOR_BLOCK_ENTITY =
+            FabricBlockEntityTypeBuilder.create(FocalManipulatorBlockEntity::new, FOCAL_MANIPULATOR).build();
+
     public static void initialize() {
         Registry.register(Registries.BLOCK, Thaumaturge.identifier("vessel"), VESSEL);
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Thaumaturge.identifier("vessel"), VESSEL_BLOCK_ENTITY);
@@ -77,5 +85,8 @@ public class ModBlocks {
         Registry.register(Registries.BLOCK,Thaumaturge.identifier("pedestal"),PEDESTAL);
         Registry.register(Registries.BLOCK_ENTITY_TYPE,Thaumaturge.identifier("pedestal"),PEDESTAL_BE);
 
+
+        Registry.register(Registries.BLOCK, Thaumaturge.identifier("focal_manipulator"), FOCAL_MANIPULATOR);
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, Thaumaturge.identifier("focal_manipulator"), FOCAL_MANIPULATOR_BLOCK_ENTITY);
     }
 }

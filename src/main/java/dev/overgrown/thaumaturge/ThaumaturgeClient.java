@@ -1,7 +1,8 @@
 package dev.overgrown.thaumaturge;
 
-import dev.overgrown.aspectslib.client.AspectsTooltipConfig;
+import dev.overgrown.aspectslib.aspects.client.AspectsTooltipConfig;
 import dev.overgrown.thaumaturge.block.PedestalBlockEntityRenderer;
+import dev.overgrown.thaumaturge.block.focal_manipulator.screen.FocalManipulatorScreen;
 import dev.overgrown.thaumaturge.client.render.JarBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.render.VesselBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.screen.AlchemicalFurnaceScreen;
@@ -25,11 +26,9 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.block.entity.LecternBlockEntityRenderer;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.item.DyeableItem;
 
@@ -93,5 +92,8 @@ public class ThaumaturgeClient implements ClientModInitializer {
 
         // Alchemical Furnace Screen
         HandledScreens.register(ModScreens.ALCHEMICAL_FURNACE_SCREEN_HANDLER, AlchemicalFurnaceScreen::new);
+
+        // Focal Manipulator Screen
+        HandledScreens.register(ModScreens.FOCAL_MANIPULATOR, FocalManipulatorScreen::new);
     }
 }

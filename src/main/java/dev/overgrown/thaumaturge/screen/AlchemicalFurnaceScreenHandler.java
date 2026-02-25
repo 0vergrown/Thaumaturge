@@ -1,6 +1,6 @@
 package dev.overgrown.thaumaturge.screen;
 
-import dev.overgrown.aspectslib.api.AspectsAPI;
+import dev.overgrown.aspectslib.aspects.api.AspectsAPI;
 import dev.overgrown.thaumaturge.block.alchemical_furnace.AlchemicalFurnaceBlockEntity;
 import dev.overgrown.thaumaturge.registry.ModItems;
 import dev.overgrown.thaumaturge.registry.ModScreens;
