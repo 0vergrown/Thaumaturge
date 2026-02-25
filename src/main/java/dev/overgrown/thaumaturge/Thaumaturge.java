@@ -56,6 +56,9 @@ public class Thaumaturge implements ModInitializer {
         registerAspectEffects();
         registerModifierEffects();
 
+        //Creative Tabs
+        ModCreativeTabs.initialize();
+
         // Networking
         SpellCastPacket.registerServer();
 

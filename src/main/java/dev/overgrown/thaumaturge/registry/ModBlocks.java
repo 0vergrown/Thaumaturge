@@ -1,6 +1,9 @@
 package dev.overgrown.thaumaturge.registry;
 
 import dev.overgrown.thaumaturge.Thaumaturge;
+import dev.overgrown.thaumaturge.block.MatrixBlock;
+import dev.overgrown.thaumaturge.block.PedestalBlock;
+import dev.overgrown.thaumaturge.block.PedestalBlockEntity;
 import dev.overgrown.thaumaturge.block.alchemical_furnace.AlchemicalFurnaceBlock;
 import dev.overgrown.thaumaturge.block.alchemical_furnace.AlchemicalFurnaceBlockEntity;
 import dev.overgrown.thaumaturge.block.aspect_clusters.*;
@@ -14,6 +17,7 @@ import dev.overgrown.thaumaturge.block.vessel.VesselBlock;
 import dev.overgrown.thaumaturge.block.vessel.VesselBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
@@ -48,12 +52,15 @@ public class ModBlocks {
     public static final Block ALCHEMICAL_FURNACE = new AlchemicalFurnaceBlock(FabricBlockSettings.copyOf(Blocks.BLAST_FURNACE));
     public static final BlockEntityType<AlchemicalFurnaceBlockEntity> ALCHEMICAL_FURNACE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(AlchemicalFurnaceBlockEntity::new, ALCHEMICAL_FURNACE).build();
 
+    public static final Block MATRIX = new MatrixBlock(AbstractBlock.Settings.create());
+    public static final Block PEDESTAL = new PedestalBlock(AbstractBlock.Settings.create());
+    public static final BlockEntityType<PedestalBlockEntity> PEDESTAL_BE = BlockEntityType.Builder.create(PedestalBlockEntity::new,PEDESTAL).build(null);
+
     public static final Block FOCAL_MANIPULATOR = new FocalManipulatorBlock(
             FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()
     );
     public static final BlockEntityType<FocalManipulatorBlockEntity> FOCAL_MANIPULATOR_BLOCK_ENTITY =
             FabricBlockEntityTypeBuilder.create(FocalManipulatorBlockEntity::new, FOCAL_MANIPULATOR).build();
-
 
     public static void initialize() {
         Registry.register(Registries.BLOCK, Thaumaturge.identifier("vessel"), VESSEL);
@@ -74,6 +81,10 @@ public class ModBlocks {
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Thaumaturge.identifier("jar"), JAR_BLOCK_ENTITY);
         Registry.register(Registries.BLOCK, Thaumaturge.identifier("alchemical_furnace"), ALCHEMICAL_FURNACE);
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Thaumaturge.identifier("alchemical_furnace"), ALCHEMICAL_FURNACE_BLOCK_ENTITY);
+        Registry.register(Registries.BLOCK,Thaumaturge.identifier("matrix"),MATRIX);
+        Registry.register(Registries.BLOCK,Thaumaturge.identifier("pedestal"),PEDESTAL);
+        Registry.register(Registries.BLOCK_ENTITY_TYPE,Thaumaturge.identifier("pedestal"),PEDESTAL_BE);
+
 
         Registry.register(Registries.BLOCK, Thaumaturge.identifier("focal_manipulator"), FOCAL_MANIPULATOR);
         Registry.register(Registries.BLOCK_ENTITY_TYPE, Thaumaturge.identifier("focal_manipulator"), FOCAL_MANIPULATOR_BLOCK_ENTITY);

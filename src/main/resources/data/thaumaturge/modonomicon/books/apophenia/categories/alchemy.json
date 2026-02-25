@@ -3,6 +3,6 @@
   "entry_textures": "modonomicon:textures/gui/entry_textures.png",
   "icon": "thaumaturge:vessel",
   "name": "category.thaumaturge.apophenia.alchemy.name",
-  "sort_number": 2,
+  "sort_number": 1,
   "description": "category.thaumaturge.apophenia.alchemy.description"
 }

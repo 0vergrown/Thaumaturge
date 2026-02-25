@@ -1,6 +1,7 @@
 package dev.overgrown.thaumaturge;
 
 import dev.overgrown.aspectslib.aspects.client.AspectsTooltipConfig;
+import dev.overgrown.thaumaturge.block.PedestalBlockEntityRenderer;
 import dev.overgrown.thaumaturge.block.focal_manipulator.screen.FocalManipulatorScreen;
 import dev.overgrown.thaumaturge.client.render.JarBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.render.VesselBlockEntityRenderer;
@@ -51,6 +52,8 @@ public class ThaumaturgeClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.SPELL_BOLT, SpellBoltRenderer::new);
         EntityRendererRegistry.register(ModEntities.ARCANE_MINE, EmptyEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.ALKIMIA_CLOUD, EmptyEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlocks.PEDESTAL_BE, PedestalBlockEntityRenderer::new);
+
 
         // Tooltips visible only with lens
         AspectsTooltipConfig.addVisibilityCondition((stack, player) -> AspectLensItem.hasLens(player));

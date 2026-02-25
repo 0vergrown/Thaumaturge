@@ -111,6 +111,9 @@ public class ModItems {
     public static final Item FAUCET = new BlockItem(ModBlocks.FAUCET, new FabricItemSettings());
     public static final Item JAR = new BlockItem(ModBlocks.JAR, new FabricItemSettings());
     public static final Item ALCHEMICAL_FURNACE = new BlockItem(ModBlocks.ALCHEMICAL_FURNACE, new FabricItemSettings());
+    public static final Item MATRIX = new BlockItem(ModBlocks.MATRIX,new Item.Settings());
+    public static final Item PEDESTAL = new BlockItem(ModBlocks.PEDESTAL,new Item.Settings());
+
     public static final Item FOCAL_MANIPULATOR = new BlockItem(ModBlocks.FOCAL_MANIPULATOR, new FabricItemSettings());
 
     // Aspect Cluster Block Items
@@ -159,8 +162,9 @@ public class ModItems {
         Registry.register(Registries.ITEM, Thaumaturge.identifier("faucet"), FAUCET);
         Registry.register(Registries.ITEM, Thaumaturge.identifier("jar"), JAR);
         Registry.register(Registries.ITEM, Thaumaturge.identifier("alchemical_furnace"), ALCHEMICAL_FURNACE);
+        Registry.register(Registries.ITEM, Thaumaturge.identifier("matrix"), MATRIX);
+        Registry.register(Registries.ITEM, Thaumaturge.identifier("pedestal"), PEDESTAL);
         Registry.register(Registries.ITEM, Thaumaturge.identifier("focal_manipulator"), FOCAL_MANIPULATOR);
-
 
         // Register Aspect Cluster block items
         Registry.register(Registries.ITEM, Thaumaturge.identifier("aer_cluster"), AER_CLUSTER);
