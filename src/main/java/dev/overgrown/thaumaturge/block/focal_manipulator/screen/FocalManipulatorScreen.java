@@ -2,6 +2,7 @@ package dev.overgrown.thaumaturge.block.focal_manipulator.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.PresetsScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -20,6 +21,8 @@ public class FocalManipulatorScreen extends HandledScreen<FocalManipulatorScreen
     private TextFieldWidget spellNameField;
     private ButtonWidget craftButton;
 
+    private FocalListWidget focalListWidget;
+
     public FocalManipulatorScreen(FocalManipulatorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         this.backgroundWidth = 256;
@@ -37,6 +40,17 @@ public class FocalManipulatorScreen extends HandledScreen<FocalManipulatorScreen
             // TODO: start crafting
         }).dimensions(this.x + 227, this.y + 6, 40, 20).build();
         this.addDrawableChild(this.craftButton);
+
+        int yOff = 30;
+        this.focalListWidget = new FocalListWidget(this,client,32,backgroundHeight,
+                y+yOff,y+backgroundHeight-68,36);
+        this.focalListWidget.setRenderBackground(false);
+        this.focalListWidget.setRenderHorizontalShadows(false);
+        this.addSelectableChild(this.focalListWidget);
+    }
+
+    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+        return this.focalListWidget.mouseScrolled(mouseX, mouseY, amount);
     }
 
     @Override
@@ -70,8 +84,13 @@ public class FocalManipulatorScreen extends HandledScreen<FocalManipulatorScreen
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
+        this.focalListWidget.render(context, mouseX, mouseY, delta);
         this.spellNameField.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
+    }
+
+    public int guiLeft() {
+        return x;
     }
 
     @Override
