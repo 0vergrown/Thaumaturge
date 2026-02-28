@@ -1,9 +1,9 @@
 package dev.overgrown.thaumaturge.registry;
 
 import dev.overgrown.thaumaturge.Thaumaturge;
-import dev.overgrown.thaumaturge.block.MatrixBlock;
-import dev.overgrown.thaumaturge.block.PedestalBlock;
-import dev.overgrown.thaumaturge.block.PedestalBlockEntity;
+import dev.overgrown.thaumaturge.block.matrix.MatrixBlock;
+import dev.overgrown.thaumaturge.block.pedestal.PedestalBlock;
+import dev.overgrown.thaumaturge.block.pedestal.PedestalBlockEntity;
 import dev.overgrown.thaumaturge.block.alchemical_furnace.AlchemicalFurnaceBlock;
 import dev.overgrown.thaumaturge.block.alchemical_furnace.AlchemicalFurnaceBlockEntity;
 import dev.overgrown.thaumaturge.block.aspect_clusters.*;

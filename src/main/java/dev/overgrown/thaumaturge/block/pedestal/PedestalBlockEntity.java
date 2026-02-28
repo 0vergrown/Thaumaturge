@@ -1,4 +1,4 @@
-package dev.overgrown.thaumaturge.block;
+package dev.overgrown.thaumaturge.block.pedestal;
 
 import dev.overgrown.thaumaturge.registry.ModBlocks;
 import net.minecraft.block.BlockState;

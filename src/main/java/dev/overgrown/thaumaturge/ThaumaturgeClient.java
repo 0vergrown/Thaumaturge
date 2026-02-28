@@ -1,7 +1,7 @@
 package dev.overgrown.thaumaturge;
 
 import dev.overgrown.aspectslib.aspects.client.AspectsTooltipConfig;
-import dev.overgrown.thaumaturge.block.PedestalBlockEntityRenderer;
+import dev.overgrown.thaumaturge.block.pedestal.client.PedestalBlockEntityRenderer;
 import dev.overgrown.thaumaturge.block.focal_manipulator.screen.FocalManipulatorScreen;
 import dev.overgrown.thaumaturge.client.render.JarBlockEntityRenderer;
 import dev.overgrown.thaumaturge.client.render.VesselBlockEntityRenderer;

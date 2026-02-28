@@ -1,5 +1,6 @@
-package dev.overgrown.thaumaturge.block;
+package dev.overgrown.thaumaturge.block.pedestal.client;
 
+import dev.overgrown.thaumaturge.block.pedestal.PedestalBlockEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;

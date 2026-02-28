@@ -1,4 +1,4 @@
-package dev.overgrown.thaumaturge.block;
+package dev.overgrown.thaumaturge.block.matrix;
 
 import net.minecraft.block.Block;
 
