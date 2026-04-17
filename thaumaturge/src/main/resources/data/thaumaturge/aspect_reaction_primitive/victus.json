@@ -1,0 +1,11 @@
+{
+  "input_a": "aspectslib:perditio",
+  "input_b": "aspectslib:ordo",
+  "result": "aspectslib:victus",
+  "fr_min": -1,
+  "fr_max": 1,
+  "fr_towards_colder": true,
+  "fr_direction_reversible": true,
+  "catalyst_chance": 0.2,
+  "catalysts": ["aspectslib:lux", "aspectslib:potentia", "aspectslib:ignis"]
+}

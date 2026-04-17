@@ -1,0 +1,10 @@
+{
+  "input_a": "aspectslib:aer",
+  "input_b": "aspectslib:ignis",
+  "result": "aspectslib:lux",
+  "fr_min": 0,
+  "fr_max": 3,
+  "fr_towards_colder": false,
+  "catalyst_chance": 0.2,
+  "catalysts": ["aspectslib:ordo", "aspectslib:permutatio"]
+}

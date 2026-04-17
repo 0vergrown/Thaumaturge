@@ -6,6 +6,7 @@
     "ItemEntityMixin",
     "ItemRendererAccessor",
     "ItemUseMixin",
+    "MinecraftServerMixin",
     "SlotClickMixin"
   ],
   "injectors": {

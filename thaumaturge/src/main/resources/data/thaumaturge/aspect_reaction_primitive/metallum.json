@@ -1,0 +1,11 @@
+{
+  "input_a": "aspectslib:terra",
+  "input_b": "aspectslib:ordo",
+  "result": "aspectslib:metallum",
+  "fr_min": -2,
+  "fr_max": 3,
+  "fr_towards_colder": true,
+  "fr_direction_reversible": true,
+  "catalyst_chance": 0.2,
+  "catalysts": ["aspectslib:ignis"]
+}

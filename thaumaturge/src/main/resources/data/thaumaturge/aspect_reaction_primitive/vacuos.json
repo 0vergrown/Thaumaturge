@@ -1,0 +1,11 @@
+{
+  "input_a": "aspectslib:aer",
+  "input_b": "aspectslib:perditio",
+  "result": "aspectslib:vacous",
+  "fr_min": -2,
+  "fr_max": 3,
+  "fr_towards_colder": true,
+  "fr_direction_reversible": true,
+  "catalyst_chance": 0.2,
+  "catalysts": ["aspectslib:ordo", "aspectslib:terra"]
+}

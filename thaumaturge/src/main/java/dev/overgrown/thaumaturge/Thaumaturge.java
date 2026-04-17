@@ -1,5 +1,6 @@
 package dev.overgrown.thaumaturge;
 
+import dev.overgrown.thaumaturge.block.vessel.AspectReactionPrimitiveManager;
 import dev.overgrown.thaumaturge.networking.FocalManipulatorPackets;
 import dev.overgrown.thaumaturge.networking.GauntletCastPackets;
 import dev.overgrown.thaumaturge.recipe.VesselRecipe;
@@ -10,8 +11,10 @@ import dev.overgrown.thaumaturge.spell.impl.effects.*;
 import dev.overgrown.thaumaturge.spell.input.GauntletInputTracker;
 import dev.overgrown.thaumaturge.spell.input.GauntletInteractionBlocklist;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,6 +86,10 @@ public class Thaumaturge implements ModInitializer {
         GauntletInteractionBlocklist.register(ModBlocks.JAR);
         GauntletInteractionBlocklist.register(ModBlocks.ALCHEMICAL_FURNACE);
         GauntletInteractionBlocklist.register(ModBlocks.FOCAL_MANIPULATOR);
+
+        // Resource Manager
+        ResourceManagerHelper server = ResourceManagerHelper.get(ResourceType.SERVER_DATA);
+        server.registerReloadListener(new AspectReactionPrimitiveManager());
 
         LOGGER.info("Thaumaturge initialized!");
     }

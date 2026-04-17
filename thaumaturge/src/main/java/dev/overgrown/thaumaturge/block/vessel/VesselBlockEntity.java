@@ -31,20 +31,41 @@ import java.util.*;
 
 public class VesselBlockEntity extends BlockEntity implements AspectContainer {
     public final static int MAX_SLUDGE_AMOUNT = 96;
+    private final static float SLUDGE_CHANCE = 0.10f;
+
     private final AspectMap aspects = new AspectMap();
     private final AspectMap sludgeAspects = new AspectMap();
-    private boolean boiling = false;
+
+    // Temperature
+    //  4 - Soul Fire
+    //  3 - Lava
+    //  2 - Fire
+    //  1 - Torch
+    //  0 - Ambient
+    // -1 - Snow, Ice
+    // -2 - Blue Ice
+    private int temperature = 0;
+
     private int processTime = 0;
     private ItemStack processItems = ItemStack.EMPTY;
+    private int tickOffset;
 
     public VesselBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlocks.VESSEL_BLOCK_ENTITY, pos, state);
+        tickOffset = Math.abs(pos.getX() + pos.getY() + pos.getZ()) % 20;
     }
 
 
     public static void serverTick(World world, BlockPos pos, BlockState state, VesselBlockEntity blockEntity) {
         ServerWorld serverWorld = (ServerWorld) world;
-        if (blockEntity.boiling) {
+
+        // Check if water level is 0 and there are aspects
+        int waterLevel = state.get(VesselBlock.WATER_LEVEL);
+        if (waterLevel == 0 && !blockEntity.aspects.isEmpty()) {
+            blockEntity.convertAspectsToVitium(serverWorld, pos);
+        }
+
+        if (blockEntity.isBoiling() && waterLevel > 0) {
             if (world.getTime() % 10 == 0) {
                 ((ServerWorld) world).spawnParticles(ParticleTypes.BUBBLE_POP,
                         pos.getX() + 0.5, pos.getY() + 0.9, pos.getZ() + 0.5,
@@ -60,10 +81,9 @@ public class VesselBlockEntity extends BlockEntity implements AspectContainer {
             }
         }
 
-        // Check if water level is 0 and there are aspects
-        int waterLevel = state.get(VesselBlock.WATER_LEVEL);
-        if (waterLevel == 0 && !blockEntity.aspects.isEmpty()) {
-            blockEntity.convertAspectsToVitium(serverWorld, pos);
+        // Process Aspect Reaction
+        if (world.getTime() % 20 == blockEntity.tickOffset && waterLevel > 0) {
+            blockEntity.aspectReaction(serverWorld);
         }
     }
 
@@ -82,7 +102,6 @@ public class VesselBlockEntity extends BlockEntity implements AspectContainer {
         this.sludgeAspects.clear();
 
         // Reset boiling state and process time
-        this.boiling = false;
         this.processTime = 0;
 
         // Visual and sound effects
@@ -108,16 +127,14 @@ public class VesselBlockEntity extends BlockEntity implements AspectContainer {
                 if (noSludge) {
                     aspects.modifyAspectLevel(entry.getKey(), totalAmount);
                 } else {
-                    int part_a = totalAmount / 2;
-                    int part_b = totalAmount - part_a;
-
-                    if (world.getRandom().nextBoolean()) {
-                        aspects.modifyAspectLevel(entry.getKey(), part_a);
-                        sludgeAspects.modifyAspectLevel(entry.getKey(), part_b);
-                    } else {
-                        aspects.modifyAspectLevel(entry.getKey(), part_b);
-                        sludgeAspects.modifyAspectLevel(entry.getKey(), part_a);
+                    float sludgeAmountFloat = totalAmount * SLUDGE_CHANCE;
+                    int sludgeAmountInteger = (int) sludgeAmountFloat;
+                    if (world.getRandom().nextFloat() < (sludgeAmountFloat - (float) sludgeAmountInteger)) {
+                        sludgeAmountInteger = sludgeAmountInteger + 1;
                     }
+                    int aspectAmountInteger = totalAmount - sludgeAmountInteger;
+                    aspects.modifyAspectLevel(entry.getKey(), aspectAmountInteger);
+                    sludgeAspects.modifyAspectLevel(entry.getKey(), sludgeAmountInteger);
                 }
             }
             if (processItems.getCount() <= 1) {
@@ -228,6 +245,25 @@ public class VesselBlockEntity extends BlockEntity implements AspectContainer {
         return false;
     }
 
+    protected void aspectReaction(ServerWorld world) {
+
+        List<AspectReaction> reactions = ((AspectReactionHolder.Provider) world.getServer()).
+                thaumaturge$getAspectReactionHolder().getPossibleReactions(temperature, aspects);
+
+        if (reactions.isEmpty()) return;
+
+        var reaction = reactions.get(world.getRandom().nextInt(reactions.size()));
+
+        for (var input : reaction.input) {
+            aspects.modifyAspectLevel(input, -1);
+        }
+        for (var output : reaction.output) {
+            aspects.modifyAspectLevel(output, 1);
+        }
+        markDirty();
+        syncToClient();
+    }
+
 
     @Override
     public Set<Identifier> getAspects() {
@@ -276,13 +312,17 @@ public class VesselBlockEntity extends BlockEntity implements AspectContainer {
         }
     }
 
-    public void setBoiling(boolean boiling) {
-        this.boiling = boiling;
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
         markDirty();
     }
 
+    public int getTemperature() {
+        return temperature;
+    }
+
     public boolean isBoiling() {
-        return boiling;
+        return temperature > 1;
     }
 
     @Override
@@ -295,7 +335,7 @@ public class VesselBlockEntity extends BlockEntity implements AspectContainer {
         nbt.put("Aspects", aspectsNbt);
         NbtCompound sludgeAspectsNbt = sludgeAspects.toCompound();
         nbt.put("SludgeAspects", sludgeAspectsNbt);
-        nbt.putBoolean("Boiling", boiling);
+        nbt.putInt("Temperature", temperature);
         nbt.putInt("ProcessTime", processTime);
     }
 
@@ -310,7 +350,7 @@ public class VesselBlockEntity extends BlockEntity implements AspectContainer {
         NbtCompound sludgeAspectsNbt = nbt.getCompound("SludgeAspects");
         sludgeAspects.fromNbt(sludgeAspectsNbt);
 
-        boiling = nbt.getBoolean("Boiling");
+        temperature = nbt.getInt("Temperature");
         processTime = nbt.getInt("ProcessTime");
     }
 

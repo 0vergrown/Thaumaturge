@@ -1,5 +1,6 @@
 package dev.overgrown.thaumaturge.block.vessel;
 
+import dev.overgrown.thaumaturge.Thaumaturge;
 import dev.overgrown.thaumaturge.item.alchemical_sludge_bottle.AlchemicalSludgeBottleItem;
 import dev.overgrown.thaumaturge.registry.ModBlocks;
 import net.minecraft.block.*;
@@ -61,6 +62,13 @@ public class VesselBlock extends BlockWithEntity {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack stack = player.getStackInHand(hand);
         BlockEntity blockEntity = world.getBlockEntity(pos);
+
+        if (stack.isOf(Items.DEBUG_STICK) && !world.isClient) {
+            ServerWorld serverWorld = (ServerWorld) world;
+            AspectReactionHolder.Provider reactionProvider = (AspectReactionHolder.Provider) serverWorld.getServer();
+            AspectReactionHolder reactionHolder = reactionProvider.thaumaturge$getAspectReactionHolder();
+            Thaumaturge.LOGGER.info(reactionHolder.toString());
+        }
 
         if (!(blockEntity instanceof VesselBlockEntity vessel)) {
             return ActionResult.PASS;
@@ -140,31 +148,36 @@ public class VesselBlock extends BlockWithEntity {
         return ActionResult.PASS;
     }
 
-    public static boolean isHeatSourceBelow(World world, BlockPos pos) {
+    public static int getTemperatureFromBelow(World world, BlockPos pos) {
         BlockPos belowPos = pos.down();
         BlockState belowState = world.getBlockState(belowPos);
-        return belowState.isOf(Blocks.FIRE) ||
-                belowState.isOf(Blocks.LAVA) ||
-                belowState.isOf(Blocks.CAMPFIRE) ||
-                belowState.isOf(Blocks.SOUL_CAMPFIRE);
+        if (belowState.isOf(Blocks.SOUL_FIRE) || belowState.isOf(Blocks.SOUL_CAMPFIRE)) {
+            return 4;
+        }  else if (belowState.isOf(Blocks.LAVA) || belowState.isOf(Blocks.LAVA_CAULDRON)) {
+            return 3;
+        }  else if (belowState.isOf(Blocks.FIRE) || belowState.isOf(Blocks.CAMPFIRE)) {
+            return 2;
+        } else if (belowState.isOf(Blocks.TORCH)) {
+            return 1;
+        } else if (belowState.isOf(Blocks.ICE) || belowState.isOf(Blocks.SNOW_BLOCK)) {
+            return -1;
+        } else if (belowState.isOf(Blocks.BLUE_ICE)) {
+            return -2;
+        } else {
+            return 0;
+        }
     }
 
     private void updateBoilingState(World world, BlockPos pos, BlockState state) {
-        boolean hasWater = state.get(WATER_LEVEL) > 0;
-        boolean hasHeat = isHeatSourceBelow(world, pos);
-
         if (world.getBlockEntity(pos) instanceof VesselBlockEntity vessel) {
-            vessel.setBoiling(hasWater && hasHeat);
+            vessel.setTemperature(getTemperatureFromBelow(world, pos));
         }
     }
 
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        boolean hasWater = state.get(WATER_LEVEL) > 0;
-        boolean hasHeat = isHeatSourceBelow(world, pos);
-
         if (world.getBlockEntity(pos) instanceof VesselBlockEntity vessel) {
-            vessel.setBoiling(hasWater && hasHeat);
+            vessel.setTemperature(getTemperatureFromBelow(world, pos));
         }
         super.neighborUpdate(state, world, pos, block, fromPos, notify);
     }

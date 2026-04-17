@@ -1,0 +1,10 @@
+{
+  "input_a": "aspectslib:aqua",
+  "input_b": "aspectslib:ordo",
+  "result": "aspectslib:gelum",
+  "fr_min": -2,
+  "fr_max": -1,
+  "fr_towards_colder": true,
+  "catalyst_chance": 0.2,
+  "catalysts": ["aspectslib:vitreus", "aspectslib:potentia"]
+}
